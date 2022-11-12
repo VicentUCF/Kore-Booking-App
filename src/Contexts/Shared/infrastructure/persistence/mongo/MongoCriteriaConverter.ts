@@ -46,14 +46,14 @@ export class MongoCriteriaConverter {
   }
 
   protected generateFilter(filters: Filters): MongoFilter {
-    const filter = filters.filters.map(filter => {
-      const transformer = this.filterTransformers.get(filter.operator.value);
+    const filter = filters.filters.map(f => {
+      const transformer = this.filterTransformers.get(f.operator.value);
 
       if (!transformer) {
-        throw Error(`Unexpected operator value ${filter.operator.value}`);
+        throw Error(`Unexpected operator value ${f.operator.value}`);
       }
 
-      return transformer(filter);
+      return transformer(f);
     });
 
     return Object.assign({}, ...filter);
