@@ -1,7 +1,7 @@
 import { Collection, MongoClient } from 'mongodb';
-import { MongoCriteriaConverter } from '../../../../Backoffice/Courses/infrastructure/persistence/MongoCriteriaConverter';
 import { AggregateRoot } from '../../../domain/AggregateRoot';
 import { Criteria } from '../../../domain/criteria/Criteria';
+import { MongoCriteriaConverter } from './MongoCriteriaConverter';
 
 export abstract class MongoRepository<T extends AggregateRoot> {
   private criteriaConverter: MongoCriteriaConverter;
@@ -28,7 +28,7 @@ export abstract class MongoRepository<T extends AggregateRoot> {
     await collection.updateOne({ _id: id }, { $set: document }, { upsert: true });
   }
 
-  protected async searchByCriteria<D>(criteria: Criteria): Promise<D[]> {
+  protected async searchByCriteria<D extends Document>(criteria: Criteria): Promise<D[]> {
     const query = this.criteriaConverter.convert(criteria);
 
     const collection = await this.collection();
