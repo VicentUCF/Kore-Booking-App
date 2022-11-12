@@ -17,6 +17,10 @@ describe('DomainEventFailoverPublisher test', () => {
     await arranger.arrange();
   });
 
+  afterAll(async () => {
+    await arranger.close();
+  });
+
   it('should save the published events', async () => {
     const eventBus = new DomainEventFailoverPublisher(mongoClient, deserializer);
     const event = DomainEventDummyMother.random();

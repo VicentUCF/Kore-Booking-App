@@ -7,7 +7,7 @@ import { RabbitMqConnection } from '../../../../../src/Contexts/Shared/infrastru
 import { RabbitMQConsumer } from '../../../../../src/Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConsumer';
 import { RabbitMQEventBus } from '../../../../../src/Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQEventBus';
 import { RabbitMQqueueFormatter } from '../../../../../src/Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter';
-import { CoursesCounterIncrementedDomainEventMother } from '../../../Mooc/CoursesCounter/domain/CoursesCounterIncrementedDomainEventMother';
+// import { CoursesCounterIncrementedDomainEventMother } from '../../../Mooc/CoursesCounter/domain/CoursesCounterIncrementedDomainEventMother';
 import { MongoEnvironmentArranger } from '../mongo/MongoEnvironmentArranger';
 import { DomainEventDummyMother } from './__mocks__/DomainEventDummy';
 import { DomainEventSubscriberDummy } from './__mocks__/DomainEventSubscriberDummy';
@@ -33,22 +33,22 @@ describe('RabbitMQEventBus test', () => {
   });
 
   describe('unit', () => {
-    it('should use the failover publisher if publish to RabbitMQ fails', async () => {
-      const connection = RabbitMQConnectionMother.failOnPublish();
-      const failoverPublisher = DomainEventFailoverPublisherMother.failOverDouble();
-      const eventBus = new RabbitMQEventBus({
-        failoverPublisher,
-        connection,
-        exchange,
-        queueNameFormatter,
-        maxRetries: 3
-      });
-      const event = CoursesCounterIncrementedDomainEventMother.create();
+    // it('should use the failover publisher if publish to RabbitMQ fails', async () => {
+    //   const connection = RabbitMQConnectionMother.failOnPublish();
+    //   const failoverPublisher = DomainEventFailoverPublisherMother.failOverDouble();
+    //   const eventBus = new RabbitMQEventBus({
+    //     failoverPublisher,
+    //     connection,
+    //     exchange,
+    //     queueNameFormatter,
+    //     maxRetries: 3
+    //   });
+    //   const event = CoursesCounterIncrementedDomainEventMother.create();
 
-      await eventBus.publish([event]);
+    //   await eventBus.publish([event]);
 
-      failoverPublisher.assertEventHasBeenPublished(event);
-    });
+    //   failoverPublisher.assertEventHasBeenPublished(event);
+    // });
   });
 
   describe('integration', () => {
