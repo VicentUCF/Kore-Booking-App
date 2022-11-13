@@ -1,0 +1,9 @@
+services:
+
+  Apps.CourtsManager.controllers.StatusGetController:
+    class: ../../controllers/StatusGetController
+    arguments: []
+
+  Apps.CourtsManager.controllers.BookingPutController:
+    class: ../../controllers/BookingPutController
+    arguments: ['@CourtsManager.Shared.domain.CommandBus']

@@ -1,0 +1,75 @@
+services:
+  Shared.Logger:
+    class: ../../../../../Contexts/Shared/infrastructure/WinstonLogger
+    arguments: []
+
+  CourtsManager.Shared.MongoConfig:
+    factory:
+      class: ../../../../../Contexts/CourtsManager/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      method: 'createConfig'
+
+  CourtsManager.Shared.ConnectionManager:
+    factory:
+      class: ../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory
+      method: 'createClient'
+    arguments: ['CourtsManager', '@CourtsManager.Shared.MongoConfig']
+
+  CourtsManager.Shared.CommandHandlers:
+    class: ../../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers
+    arguments: ['!tagged commandHandler']
+
+  CourtsManager.Shared.domain.CommandBus:
+    class: ../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus
+    arguments: ['@CourtsManager.Shared.CommandHandlers']
+
+  CourtsManager.Shared.RabbitMQConfig:
+    factory:
+      class: ../../../../../Contexts/CourtsManager/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory
+      method: 'createConfig'
+
+  CourtsManager.Shared.domain.EventBus:
+    factory:
+      class: ../../../../../Contexts/CourtsManager/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+      method: 'create'
+    arguments:
+      [
+        '@CourtsManager.Shared.DomainEventFailoverPublisher',
+        '@CourtsManager.Shared.RabbitMQConnection',
+        '@CourtsManager.Shared.RabbitMQqueueFormatter',
+        '@CourtsManager.Shared.RabbitMQConfig'
+      ]
+
+  CourtsManager.Shared.RabbitMQQueueFormatter:
+    class: ../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter
+    arguments: ['CourtsManager']
+
+  CourtsManager.Shared.RabbitMQConnection:
+    class: ../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMqConnection
+    arguments: ['@CourtsManager.Shared.RabbitMQConfig']
+
+  CourtsManager.Shared.RabbitMQqueueFormatter:
+    class: ../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter
+    arguments: ['CourtsManager']
+
+  CourtsManager.Shared.DomainEventFailoverPublisher:
+    class: ../../../../../Contexts/Shared/infrastructure/EventBus/DomainEventFailoverPublisher/DomainEventFailoverPublisher
+    arguments: ['@CourtsManager.Shared.ConnectionManager']
+
+  CourtsManager.Shared.QueryHandlers:
+    class: ../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers
+    arguments: ['!tagged queryHandler']
+
+  CourtsManager.Shared.domain.QueryBus:
+    class: ../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
+    arguments: ['@CourtsManager.Shared.QueryHandlers']
+
+  CourtsManager.Shared.ElasticConfig:
+    factory:
+      class: ../../../../../Contexts/CourtsManager/Bookings/infrastructure/persistence/ElasticConfigFactory
+      method: 'createConfig'
+
+  CourtsManager.Shared.ElasticConnectionManager:
+    factory:
+      class: ../../../../../Contexts/Shared/infrastructure/persistence/elasticsearch/ElasticClientFactory
+      method: 'createClient'
+    arguments: ['CourtsManager', '@CourtsManager.Shared.ElasticConfig']

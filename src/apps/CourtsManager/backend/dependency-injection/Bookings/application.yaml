@@ -1,0 +1,14 @@
+services:
+  CourtsManager.Bookings.domain.BookingRepository:
+    class: ../../../../../Contexts/CourtsManager/Bookings/infrastructure/persistence/MongoBookingRepository
+    arguments: ['@CourtsManager.Shared.ConnectionManager']
+
+  CourtsManager.Bookings.application.BookingCreator:
+    class: ../../../../../Contexts/CourtsManager/Bookings/application/Create/BookingCreator
+    arguments: ['@CourtsManager.Bookings.domain.BookingRepository', '@CourtsManager.Shared.domain.EventBus']
+
+  CourtsManager.Bookings.CreateBookingCommandHandler:
+    class: ../../../../../Contexts/CourtsManager/Bookings/application/Create/CreateBookingCommandHandler
+    arguments: ['@CourtsManager.Bookings.application.BookingCreator']
+    tags:
+      - { name: 'commandHandler' }
