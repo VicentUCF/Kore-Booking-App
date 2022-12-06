@@ -12,6 +12,9 @@
   },
   "scripts": {
     "dev:courts_manager:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/apps/CourtsManager/backend/start.ts",
+    "start:courts_manager:backend": "NODE_ENV=production node dist/src/apps/CourtsManager/backend/start",
+    "start": "npm run start:courts_manager:backend",
+    "dev": "npm run dev:courts_manager:backend",
     "lint": "tslint src/**/*.ts{,x}",
     "test": "npm run test:unit && npm run test:features",
     "test:unit": "NODE_ENV=test jest",

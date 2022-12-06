@@ -1,14 +1,34 @@
 services:
-  CourtsManager.Bookings.domain.BookingRepository:
+  CourtsManager.Bookings.BookingRepository:
     class: ../../../../../Contexts/CourtsManager/Bookings/infrastructure/persistence/MongoBookingRepository
     arguments: ['@CourtsManager.Shared.ConnectionManager']
 
   CourtsManager.Bookings.application.BookingCreator:
     class: ../../../../../Contexts/CourtsManager/Bookings/application/Create/BookingCreator
-    arguments: ['@CourtsManager.Bookings.domain.BookingRepository', '@CourtsManager.Shared.domain.EventBus']
+    arguments: ['@CourtsManager.Bookings.BookingRepository', '@CourtsManager.Shared.domain.EventBus']
 
   CourtsManager.Bookings.CreateBookingCommandHandler:
     class: ../../../../../Contexts/CourtsManager/Bookings/application/Create/CreateBookingCommandHandler
     arguments: ['@CourtsManager.Bookings.application.BookingCreator']
     tags:
       - { name: 'commandHandler' }
+
+  CourtsManager.Bookings.SearchCoursesByCriteriaQueryHandler:
+    class: ../../../../../Contexts/CourtsManager/Bookings/application/SearchByCriteria/SearchBookingsByCriteriaQueryHandler
+    arguments: ['@CourtsManager.Bookings.application.BookingsByCriteriaSearcher']
+    tags:
+      - { name: 'queryHandler' }
+
+  CourtsManager.Bookings.application.BookingsByCriteriaSearcher:
+    class: ../../../../../Contexts/CourtsManager/Bookings/application/SearchByCriteria/BookingsByCriteriaSearcher
+    arguments: ['@CourtsManager.Bookings.BookingRepository']
+
+  CourtsManager.Bookings.application.BookingsFinder:
+    class: ../../../../../Contexts/CourtsManager/Bookings/application/SearchAll/BookingsFinder
+    arguments: ['@CourtsManager.Bookings.BookingRepository']
+
+  CourtsManager.Bookings.SearchAllBookingsQueryHandler:
+    class: ../../../../../Contexts/CourtsManager/Bookings/application/SearchAll/SearchAllBookingsQueryHandler
+    arguments: ['@CourtsManager.Bookings.application.BookingsFinder']
+    tags:
+      - { name: 'queryHandler' }

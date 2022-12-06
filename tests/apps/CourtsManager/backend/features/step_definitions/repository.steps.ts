@@ -7,7 +7,7 @@ import { BookingRepository } from '../../../../../../src/Contexts/CourtsManager/
 import { CourtId } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/CourtId';
 
 
-const bookingRepository: BookingRepository = container.get('CourtsManager.Bookings.domain.BookingRepository');
+const bookingRepository: BookingRepository = container.get('CourtsManager.Bookings.BookingRepository');
 
 Given('there is the booking:', async (booking: any) => {
   const { id, courtId, date } = JSON.parse(booking);

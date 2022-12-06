@@ -7,3 +7,7 @@ services:
   Apps.CourtsManager.controllers.BookingPutController:
     class: ../../controllers/BookingPutController
     arguments: ['@CourtsManager.Shared.domain.CommandBus']
+
+  Apps.CourtsManager.controllers.BookingGetController:
+    class: ../../controllers/BookingGetController
+    arguments: ['@CourtsManager.Shared.domain.QueryBus']

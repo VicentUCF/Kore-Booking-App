@@ -2,7 +2,6 @@ import { Router, Request, Response } from 'express';
 import container from '../dependency-injection';
 import { body } from 'express-validator';
 import { validateReqSchema } from '.';
-import StatusGetController from '../controllers/StatusGetController';
 
 export const register = (router: Router) => {
   const reqSchema = [
@@ -16,6 +15,6 @@ export const register = (router: Router) => {
     BookingPutController.run(req, res)
   );
 
-  const controller: StatusGetController = container.get('Apps.CourtsManager.controllers.StatusGetController');
-  router.get('/bookings', (req: Request, res: Response) => controller.run(req, res));
+  const BookingGetController = container.get('Apps.CourtsManager.controllers.BookingGetController');
+  router.get('/bookings', (req: Request, res: Response) => BookingGetController.run(req, res));
 };
