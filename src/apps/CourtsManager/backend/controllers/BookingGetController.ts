@@ -21,11 +21,11 @@ export class BookingGetController implements Controller {
       limit ? Number(limit) : undefined,
       offset ? Number(offset) : undefined
     );
-    try{
+    try {
       const response = await this.queryBus.ask<BookingsResponse>(query);
       res.status(httpStatus.OK).send(response.bookings);
-    }catch(e){
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send()
+    } catch (e) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }
 

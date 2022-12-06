@@ -4,7 +4,6 @@ import { Order } from '../../../../Shared/domain/criteria/Order';
 import { BookingRepository } from '../../domain/BookingRepository';
 import { BookingsResponse } from '../SearchAll/BookingsResponse';
 
-
 export class BookingsByCriteriaSearcher {
   constructor(private repository: BookingRepository) {}
 

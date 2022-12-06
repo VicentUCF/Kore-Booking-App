@@ -5,14 +5,13 @@ import { Booking } from '../../domain/Booking';
 import { BookingId } from '../../domain/BookingId';
 import { BookingRepository } from '../../domain/BookingRepository';
 
-interface BookingDocument extends Document{
+interface BookingDocument extends Document {
   _id: string;
   courtId: string;
   date: Date;
 }
 
 export class MongoBookingRepository extends MongoRepository<Booking> implements BookingRepository {
-
   public save(booking: Booking): Promise<void> {
     return this.persist(booking.id.value, booking);
   }
@@ -43,5 +42,4 @@ export class MongoBookingRepository extends MongoRepository<Booking> implements 
       Booking.fromPrimitives({ courtId: document.courtId, date: document.date, id: document._id })
     );
   }
-
 }
