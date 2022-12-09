@@ -1,0 +1,29 @@
+services:
+  CourtsManager.Courts.CourtsRepository:
+    class: ../../../../../Contexts/CourtsManager/Courts/infrastructure/persistence/MongoCourtRepository
+    arguments: ['@CourtsManager.Shared.ConnectionManager']
+
+  CourtsManager.Courts.application.CourtCreator:
+    class: ../../../../../Contexts/CourtsManager/Courts/application/Create/CourtCreator
+    arguments: ['@CourtsManager.Courts.CourtsRepository', '@CourtsManager.Shared.domain.EventBus']
+
+  CourtsManager.Courts.CreateCourtCommandHandler:
+    class: ../../../../../Contexts/CourtsManager/Courts/application/Create/CreateCourtCommandHandler
+    arguments: ['@CourtsManager.Courts.application.CourtCreator']
+    tags:
+      - { name: 'commandHandler' }
+
+  CourtsManager.Courts.SearchCourtsByCriteriaQueryHandler:
+    class: ../../../../../Contexts/CourtsManager/Courts/application/SearchByCriteria/SearchCourtsByCriteriaQueryHandler
+    arguments: ['@CourtsManager.Courts.application.CourtsByCriteriaSearcher']
+    tags:
+      - { name: 'queryHandler' }
+
+  CourtsManager.Courts.application.CourtsByCriteriaSearcher:
+    class: ../../../../../Contexts/CourtsManager/Courts/application/SearchByCriteria/CourtsByCriteriaSearcher
+    arguments: ['@CourtsManager.Courts.CourtsRepository']
+
+  CourtsManager.Courts.application.CourtsFinder:
+    class: ../../../../../Contexts/CourtsManager/Courts/application/SearchByCriteria/CourtsFinder
+    arguments: ['@CourtsManager.Courts.CourtsRepository']
+

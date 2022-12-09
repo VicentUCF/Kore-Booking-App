@@ -11,7 +11,7 @@ export const register = (router: Router) => {
   ];
 
   const BookingPutController = container.get('Apps.CourtsManager.controllers.BookingPutController');
-  router.put('/bookings/:id', reqSchema, validateReqSchema, (req: Request, res: Response) =>
+  router.put('/bookings', reqSchema, validateReqSchema, (req: Request, res: Response) =>
     BookingPutController.run(req, res)
   );
 

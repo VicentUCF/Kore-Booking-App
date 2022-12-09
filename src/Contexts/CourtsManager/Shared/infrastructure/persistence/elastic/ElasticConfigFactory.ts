@@ -1,5 +1,5 @@
-import ElasticConfig from '../../../../Shared/infrastructure/persistence/elasticsearch/ElasticConfig';
-import config from '../config';
+import ElasticConfig from '../../../../../Shared/infrastructure/persistence/elasticsearch/ElasticConfig';
+import config from '../../config';
 
 export class ElasticConfigFactory {
   static createConfig(): ElasticConfig {

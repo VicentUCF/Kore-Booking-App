@@ -65,7 +65,7 @@ services:
 
   CourtsManager.Shared.ElasticConfig:
     factory:
-      class: ../../../../../Contexts/CourtsManager/Bookings/infrastructure/persistence/ElasticConfigFactory
+      class: ../../../../../Contexts/CourtsManager/Shared/infrastructure/persistence/elastic/ElasticConfigFactory
       method: 'createConfig'
 
   CourtsManager.Shared.ElasticConnectionManager:

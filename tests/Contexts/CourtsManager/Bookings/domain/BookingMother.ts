@@ -1,5 +1,5 @@
 import { BookingId } from '../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingId';
-import { CourtId } from '../../../../../src/Contexts/CourtsManager/Bookings/domain/CourtId';
+import { CourtId } from '../../../../../src/Contexts/CourtsManager/Courts/domain/CourtId';
 import { BookingDate } from '../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingDate';
 import { Booking } from '../../../../../src/Contexts/CourtsManager/Bookings/domain/Booking';
 import { BookingIdMother } from './BookingIdMother';

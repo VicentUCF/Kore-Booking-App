@@ -1,3 +1,2 @@
 import { CriteriaQuery } from '../../../Shared/application/SearchByCriteriaQuery';
-
-export class SearchBookingsByCriteriaQuery extends CriteriaQuery {}
+export class SearchCourtsByCriteriaQuery extends CriteriaQuery {}
