@@ -4,7 +4,7 @@ import { Booking } from '../../../../../../src/Contexts/CourtsManager/Bookings/d
 import { BookingDate } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingDate';
 import { BookingId } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingId';
 import { BookingRepository } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingRepository';
-import { CourtId } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/CourtId';
+import { CourtId } from '../../../../../../src/Contexts/CourtsManager/Courts/domain/CourtId';
 
 
 const bookingRepository: BookingRepository = container.get('CourtsManager.Bookings.BookingRepository');

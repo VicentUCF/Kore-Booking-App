@@ -1,6 +1,6 @@
 import { BookingRepository } from '../../domain/BookingRepository';
 import { BookingId } from '../../domain/BookingId';
-import { CourtId } from '../../domain/CourtId';
+import { CourtId } from '../../../Courts/domain/CourtId';
 import { BookingDate } from '../../domain/BookingDate';
 import { Booking } from '../../domain/Booking';
 import { EventBus } from '../../../../Shared/domain/EventBus';

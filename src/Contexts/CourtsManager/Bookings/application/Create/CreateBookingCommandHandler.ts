@@ -2,7 +2,7 @@ import { CreateBookingCommand } from '../../domain/CreateBookingCommand';
 import { CommandHandler } from '../../../../Shared/domain/CommandHandler';
 import { Command } from '../../../../Shared/domain/Command';
 import { BookingId } from '../../domain/BookingId';
-import { CourtId } from '../../domain/CourtId';
+import { CourtId } from '../../../Courts/domain/CourtId';
 import { BookingDate } from '../../domain/BookingDate';
 import { BookingCreator } from './BookingCreator';
 

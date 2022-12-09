@@ -1,8 +1,8 @@
 import { AggregateRoot } from '../../../Shared/domain/AggregateRoot';
 import { BookingDate } from './BookingDate';
-import { CourtId } from './CourtId';
 import { BookingId } from './BookingId';
 import { BookingCreatedDomainEvent } from './BookingCreatedDomainEvent';
+import { CourtId } from '../../Courts/domain/CourtId';
 export class Booking extends AggregateRoot {
   readonly id: BookingId;
   readonly courtId: CourtId;

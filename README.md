@@ -1,20 +1,24 @@
-<p align="center">
-  <a href="http://codely.tv">
-    <img src="http://codely.tv/wp-content/uploads/2016/05/cropped-logo-codelyTV.png" width="192px" height="192px"/>
-  </a>
-</p>
+## CourtsManager
 
-<h1 align="center">
-  🐘🎯 Hexagonal Architecture, DDD & CQRS in Typescript
-</h1>
+CourtsManager is a web application that allows you to manage your padel courts.
 
-<p align="center">
-    <a href="https://github.com/CodelyTV"><img src="https://img.shields.io/badge/CodelyTV-OS-green.svg?style=flat-square" alt="codely.tv"/></a>
-    <a href="http://pro.codely.tv"><img src="https://img.shields.io/badge/CodelyTV-PRO-black.svg?style=flat-square" alt="CodelyTV Courses"/></a>
-</p>
+### Installation
 
-<p align="center">
-  Example of a Typescript application following Domain-Driven Design (DDD) and
-  Command Query Responsibility Segregation (CQRS) principles keeping the code as simple as possible.
+1. Clone the repository
+2. Install the dependencies with `npm install`
+3. Create docker containers with `docker-compose up -d`
+4. Create rabbitmq queues with `npm run command:courts_manager:rabbitmq`
+5. Test the application with `npm run test`
+6. Create bundle with `npm run build`
+7. Start the application with `npm run start`
 
-</p>
+### Development
+
+1. Create integration tests with cucumber to test endpoint works, in `tests/apps/CourtsManager/backend/features` folder you can find some examples of integration tests with cucumber and jest to test endpoint works.
+
+* Create new test with name (get, post, put, delete) + "-"  + (resource).feature
+
+* In folder `steps_definition` you can find the steps to test the endpoint works
+
+2. Create unit tests with jest to test business logic
+

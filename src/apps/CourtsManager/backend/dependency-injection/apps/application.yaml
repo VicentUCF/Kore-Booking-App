@@ -5,9 +5,17 @@ services:
     arguments: []
 
   Apps.CourtsManager.controllers.BookingPutController:
-    class: ../../controllers/BookingPutController
+    class: ../../controllers/Booking/BookingPutController
     arguments: ['@CourtsManager.Shared.domain.CommandBus']
 
   Apps.CourtsManager.controllers.BookingGetController:
-    class: ../../controllers/BookingGetController
+    class: ../../controllers/Booking/BookingGetController
     arguments: ['@CourtsManager.Shared.domain.QueryBus']
+
+  Apps.CourtsManager.controllers.CourtGetController:
+    class: ../../controllers/Court/CourtGetController
+    arguments: ['@CourtsManager.Shared.domain.QueryBus']
+
+  Apps.CourtsManager.controllers.CourtPutController:
+    class: ../../controllers/Court/CourtPutController
+    arguments: ['@CourtsManager.Shared.domain.CommandBus']

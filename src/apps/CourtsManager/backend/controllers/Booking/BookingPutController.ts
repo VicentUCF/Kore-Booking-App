@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { CommandBus } from '../../../../Contexts/Shared/domain/CommandBus';
-import { Controller } from './Controller';
-import { CreateBookingCommand } from '../../../../Contexts/CourtsManager/Bookings/domain/CreateBookingCommand';
+import { CommandBus } from '../../../../../Contexts/Shared/domain/CommandBus';
+import { Controller } from '../Controller';
+import { CreateBookingCommand } from '../../../../../Contexts/CourtsManager/Bookings/domain/CreateBookingCommand';
 
 type CoursePutRequest = Request & {
   body: {

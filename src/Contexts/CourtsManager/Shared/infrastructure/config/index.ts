@@ -1,6 +1,6 @@
 import convict from 'convict';
 
-const moocConfig = convict({
+const courtsManagerConfig = convict({
   env: {
     doc: 'The application environment.',
     format: ['production', 'development', 'staging', 'test'],
@@ -13,38 +13,6 @@ const moocConfig = convict({
       format: String,
       env: 'MONGO_URL',
       default: 'mongodb://localhost:27017/mooc-backend-dev'
-    }
-  },
-  typeorm: {
-    host: {
-      doc: 'The database host',
-      format: String,
-      env: 'TYPEORM_HOST',
-      default: 'localhost'
-    },
-    port: {
-      doc: 'The database port',
-      format: Number,
-      env: 'TYPEORM_PORT',
-      default: 5432
-    },
-    username: {
-      doc: 'The database username',
-      format: String,
-      env: 'TYPEORM_USERNAME',
-      default: 'codely'
-    },
-    password: {
-      doc: 'The database password',
-      format: String,
-      env: 'TYPEORM_PASSWORD',
-      default: 'codely'
-    },
-    database: {
-      doc: 'The database name',
-      format: String,
-      env: 'TYPEORM_DATABASE',
-      default: 'mooc-backend-dev'
     }
   },
   rabbitmq: {
@@ -108,9 +76,53 @@ const moocConfig = convict({
       env: 'RABBITMQ_RETRY_TTL',
       default: 1000
     }
+  },
+  elastic: {
+    url: {
+      doc: 'The Elastic connection URL',
+      format: String,
+      env: 'ELASTIC_URL',
+      default: 'http://localhost:9200'
+    },
+    indexName: {
+      doc: 'The Elastic index name for this context',
+      format: String,
+      env: 'ELASTIC_INDEX_NAME',
+      default: 'courtsmanagerbookings'
+    },
+    config: {
+      doc: 'The Elastic config for this context',
+      format: '*',
+      env: 'ELASTIC_CONFIG',
+      default: {
+        settings: {
+          index: {
+            number_of_replicas: 0 // for local development
+          }
+        },
+        mappings: {
+          properties: {
+            id: {
+              type: 'keyword',
+              index: true
+            },
+            name: {
+              type: 'text',
+              index: true,
+              fielddata: true
+            },
+            duration: {
+              type: 'text',
+              index: true,
+              fielddata: true
+            }
+          }
+        }
+      }
+    }
   }
 });
 
-moocConfig.loadFile([__dirname + '/default.json', __dirname + '/' + moocConfig.get('env') + '.json']);
+courtsManagerConfig.loadFile([__dirname + '/default.json', __dirname + '/' + courtsManagerConfig.get('env') + '.json']);
 
-export default moocConfig;
+export default courtsManagerConfig;

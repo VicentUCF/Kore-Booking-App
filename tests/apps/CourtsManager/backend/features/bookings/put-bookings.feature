@@ -4,7 +4,7 @@ Feature: Create a new course
   I want to create a new course
 
   Scenario: A valid non existing booking
-    Given I send a PUT request to "/bookings/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
+    Given I send a PUT request to "/bookings" with body:
       """
       {
         "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
