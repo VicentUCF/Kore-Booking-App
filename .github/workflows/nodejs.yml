@@ -1,6 +1,10 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
 
 jobs:
   build:
@@ -10,8 +14,8 @@ jobs:
       matrix:
         node-version: [14.x, 15.x]
         mongodb-version: [4.2]
-        elasticsearch-version: ['7.9.3']
-        rabbitmq-version: ['3.8.2-management-alpine']
+        elasticsearch-version: ["7.9.3"]
+        rabbitmq-version: ["3.8.2-management-alpine"]
 
     steps:
       - uses: actions/checkout@v1
@@ -41,7 +45,7 @@ jobs:
           container port: 9200
           host node port: 9300
           node port: 9300
-          discovery type: 'single-node'
+          discovery type: "single-node"
       - name: npm install
         run: |
           npm install
