@@ -4,12 +4,20 @@ import { Booking } from '../../../../../../src/Contexts/CourtsManager/Bookings/d
 import { BookingDate } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingDate';
 import { BookingId } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingId';
 import { BookingRepository } from '../../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingRepository';
-import { CourtId } from '../../../../../../src/Contexts/CourtsManager/Courts/domain/CourtId';
-
+import { Court } from '../../../../../../src/Contexts/CourtsManager/Courts/domain/Court';
+import { User } from '../../../../../../src/Contexts/CourtsManager/Users/domain/User';
 
 const bookingRepository: BookingRepository = container.get('CourtsManager.Bookings.BookingRepository');
 
 Given('there is the booking:', async (booking: any) => {
-  const { id, courtId, date } = JSON.parse(booking);
-  await bookingRepository.save(new Booking(new BookingId(id), new CourtId(courtId), new BookingDate(date)));
+  const { id, court, user, date } = JSON.parse(booking);
+
+  await bookingRepository.save(
+    new Booking({
+      id: new BookingId(id),
+      court: Court.fromPrimitives(court),
+      user: User.fromPrimitives(user),
+      date: new BookingDate(date)
+    })
+  );
 });

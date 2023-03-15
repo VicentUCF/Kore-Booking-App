@@ -42,7 +42,7 @@ describe('SearchAllBookings QueryHandler', () => {
     const filterId: Map<string, string> = new Map([
       ['field', 'courtId'],
       ['operator', Operator.EQUAL],
-      ['value', bookings[0].courtId.toString()]
+      ['value', bookings[0].court.id.toString()]
     ]);
 
     const filters: Array<Map<string, string>> = new Array(filterId);

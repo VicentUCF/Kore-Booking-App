@@ -7,9 +7,19 @@ Feature: Create a new course
     Given I send a PUT request to "/bookings" with body:
       """
       {
-        "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
-        "courtId": "8c900b20-e04a-4777-9183-32faab6d2fb5",
-        "date": "2019-08-08T08:37:32+00:00"
+        "id": "d1d69c48-d202-42ab-a3b1-8598703a1b42",
+        "user": {
+          "id": "6d429106-50b8-49a2-8f6c-db2e946632a8",
+          "name": "Paco",
+          "email": "paco@gmail.com",
+          "level": 3
+        },
+        "court": {
+          "id": "92a5eb70-763c-4941-8c0c-2531fe175c58",
+          "name": "Infilev",
+          "schedule": "de mati"
+        },
+"date": "2019-08-08T08:37:32+00:00"
       }
       """
     Then the response status code should be 201

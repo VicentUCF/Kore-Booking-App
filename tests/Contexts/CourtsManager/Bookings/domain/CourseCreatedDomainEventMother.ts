@@ -1,24 +1,29 @@
 import { BookingCreatedDomainEvent } from '../../../../../src/Contexts/CourtsManager/Bookings/domain/BookingCreatedDomainEvent';
 import { Booking } from '../../../../../src/Contexts/CourtsManager/Bookings/domain/Booking';
+import { Court } from '../../../../../src/Contexts/CourtsManager/Courts/domain/Court';
+import { User } from '../../../../../src/Contexts/CourtsManager/Users/domain/User';
 
 export class BookingCreatedDomainEventMother {
   static create({
     aggregateId,
     eventId,
-    courtId,
+    court,
+    user,
     date,
     occurredOn
   }: {
     aggregateId: string;
     eventId?: string;
-    courtId: string;
+    court: Court;
+    user: User;
     date: Date;
     occurredOn?: Date;
   }): BookingCreatedDomainEvent {
     return new BookingCreatedDomainEvent({
       aggregateId,
       eventId,
-      courtId,
+      court,
+      user,
       date,
       occurredOn
     });
@@ -27,7 +32,8 @@ export class BookingCreatedDomainEventMother {
   static fromBooking(booking: Booking): BookingCreatedDomainEvent {
     return new BookingCreatedDomainEvent({
       aggregateId: booking.id.value,
-      courtId: booking.courtId.value,
+      court: booking.court,
+      user: booking.user,
       date: booking.date.value
     });
   }

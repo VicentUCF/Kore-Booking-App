@@ -26,6 +26,7 @@ describe('CourtsManagerBookingCreator', () => {
 
     await handler.handle(command);
 
+
     repository.assertSaveHasBeenCalledWith(course);
     eventBus.assertLastPublishedEventIs(domainEvent);
   });
