@@ -1,4 +1,4 @@
-import type { User } from "../Users/User";
+import type { User } from '../Users/User';
 
 export interface Match {
   pista: string;
