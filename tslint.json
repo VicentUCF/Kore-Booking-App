@@ -1,5 +1,12 @@
 {
   "extends": "tslint-eslint-rules",
+    "linterOptions": {
+      "exclude": [
+          "node_modules/**",
+          "dist/**",
+          "src/apps/CourtsManager/frontend/**"
+      ]
+  },
   "defaultSeverity": "error",
   "rules": {
     "adjacent-overload-signatures": true,
