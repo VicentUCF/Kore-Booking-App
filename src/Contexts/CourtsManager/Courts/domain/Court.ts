@@ -3,6 +3,12 @@ import { CourtId } from './CourtId';
 import { CourtName } from './CourtName';
 import { CourtSchedule } from './CourtSchedule';
 import { CourtCreatedDomainEvent } from './CourtCreatedDomainEvent';
+
+export interface CourtPrimitive {
+  id: string;
+  name: string;
+  schedule: string;
+}
 export class Court extends AggregateRoot {
   readonly id: CourtId;
   readonly name: CourtName;
@@ -28,7 +34,7 @@ export class Court extends AggregateRoot {
     return court;
   }
 
-  static fromPrimitives(plainData: { id: string; name: string; schedule: string }): Court {
+  static fromPrimitives(plainData: CourtPrimitive): Court {
     return new Court(new CourtId(plainData.id), new CourtName(plainData.name), new CourtSchedule(plainData.schedule));
   }
 

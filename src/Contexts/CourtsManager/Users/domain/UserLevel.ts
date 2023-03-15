@@ -3,7 +3,7 @@ import { UserLevelDecimalsNotValid } from './errors/UserLevelDecimalsInvalid';
 import { UserLevelNotValid } from './errors/UserLevelNotValid';
 
 const validIntNumbers = [1, 2, 3, 4, 5, 6, 7];
-const validDecimalsNumbers = [0.25, 0.5, 0.75];
+const validDecimalsNumbers = [25, 5, 75];
 
 export class UserLevel extends NumberValueObject {
   constructor(value: number) {

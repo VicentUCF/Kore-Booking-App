@@ -1,7 +1,10 @@
+import { CourtPrimitive } from '../../../Courts/domain/Court';
+import { UserPrimitive } from '../../../Users/domain/User';
 import { Booking } from '../../domain/Booking';
 interface BookingResponse {
   id: string;
-  courtId: string;
+  court: CourtPrimitive;
+  user: UserPrimitive;
   date: Date;
 }
 

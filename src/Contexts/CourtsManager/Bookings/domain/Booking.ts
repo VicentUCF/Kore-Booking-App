@@ -2,25 +2,30 @@ import { AggregateRoot } from '../../../Shared/domain/AggregateRoot';
 import { BookingDate } from './BookingDate';
 import { BookingId } from './BookingId';
 import { BookingCreatedDomainEvent } from './BookingCreatedDomainEvent';
-import { CourtId } from '../../Courts/domain/CourtId';
+import { Court, CourtPrimitive } from '../../Courts/domain/Court';
+import { User, UserPrimitive } from '../../Users/domain/User';
 export class Booking extends AggregateRoot {
   readonly id: BookingId;
-  readonly courtId: CourtId;
+  readonly user: User;
+  readonly court: Court;
   readonly date: BookingDate;
 
-  constructor(id: BookingId, courtId: CourtId, date: BookingDate) {
+  constructor({ id, user, court, date }: { id: BookingId; user: User; court: Court; date: BookingDate }) {
     super();
     this.id = id;
-    this.courtId = courtId;
+    this.user = user;
+    this.court = court;
     this.date = date;
   }
 
-  static create(id: BookingId, courtId: CourtId, date: BookingDate) {
-    const booking = new Booking(id, courtId, date);
+  static create({ id, user, court, date }: { id: BookingId; user: User; court: Court; date: BookingDate }) {
+    const booking = new Booking({ id, user, court, date });
+
     booking.record(
       new BookingCreatedDomainEvent({
         aggregateId: booking.id.value,
-        courtId: booking.courtId.value,
+        user,
+        court,
         date: booking.date.value
       })
     );
@@ -28,14 +33,20 @@ export class Booking extends AggregateRoot {
     return booking;
   }
 
-  static fromPrimitives(plainData: { id: string; courtId: string; date: Date }): Booking {
-    return new Booking(new BookingId(plainData.id), new CourtId(plainData.courtId), new BookingDate(plainData.date));
+  static fromPrimitives(plainData: { id: string; court: CourtPrimitive; user: UserPrimitive; date: Date }): Booking {
+    return new Booking({
+      id: new BookingId(plainData.id),
+      court: Court.fromPrimitives(plainData.court),
+      user: User.fromPrimitives(plainData.user),
+      date: new BookingDate(plainData.date)
+    });
   }
 
   toPrimitives() {
     return {
       id: this.id.value,
-      courtId: this.courtId.value,
+      court: this.court.toPrimitives(),
+      user: this.user.toPrimitives(),
       date: this.date.value
     };
   }

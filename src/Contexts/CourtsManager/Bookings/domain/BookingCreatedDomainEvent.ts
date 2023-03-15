@@ -1,39 +1,49 @@
 import { DomainEvent } from '../../../Shared/domain/DomainEvent';
+import { Court, CourtPrimitive } from '../../Courts/domain/Court';
+import { User, UserPrimitive } from '../../Users/domain/User';
 
 type CreateBookingDomainEventAttributes = {
   readonly date: Date;
-  readonly courtId: string;
+  readonly court: CourtPrimitive;
+  readonly user: UserPrimitive;
 };
 
 export class BookingCreatedDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = 'booking.created';
 
-  readonly courtId: string;
+  readonly court: Court;
+  readonly user: User;
   readonly date: Date;
 
   constructor({
     aggregateId,
-    courtId,
+    court,
+    user,
     date,
     eventId,
     occurredOn
   }: {
     aggregateId: string;
     eventId?: string;
-    courtId: string;
+    court: Court;
+    user: User;
     date: Date;
     occurredOn?: Date;
   }) {
     super({ eventName: BookingCreatedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn });
-    this.courtId = courtId;
+    this.court = court;
+    this.user = user;
     this.date = date;
   }
 
   toPrimitives(): CreateBookingDomainEventAttributes {
-    const { courtId, date } = this;
+    const user = this.user.toPrimitives();
+    const court = this.court.toPrimitives();
+
     return {
-      courtId,
-      date
+      court,
+      user,
+      date: this.date
     };
   }
 
@@ -47,7 +57,8 @@ export class BookingCreatedDomainEvent extends DomainEvent {
     return new BookingCreatedDomainEvent({
       aggregateId,
       date: attributes.date,
-      courtId: attributes.courtId,
+      court: Court.fromPrimitives(attributes.court),
+      user: User.fromPrimitives(attributes.user),
       eventId,
       occurredOn
     });

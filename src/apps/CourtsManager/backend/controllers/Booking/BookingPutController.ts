@@ -3,11 +3,14 @@ import httpStatus from 'http-status';
 import { CommandBus } from '../../../../../Contexts/Shared/domain/CommandBus';
 import { Controller } from '../Controller';
 import { CreateBookingCommand } from '../../../../../Contexts/CourtsManager/Bookings/domain/CreateBookingCommand';
+import { CourtPrimitive } from '../../../../../Contexts/CourtsManager/Courts/domain/Court';
+import { UserPrimitive } from '../../../../../Contexts/CourtsManager/Users/domain/User';
 
 type CoursePutRequest = Request & {
   body: {
     id: string;
-    courtId: string;
+    court: CourtPrimitive;
+    user: UserPrimitive;
     date: Date;
   };
 };
@@ -16,8 +19,8 @@ export class BookingPutController implements Controller {
 
   async run(req: CoursePutRequest, res: Response) {
     try {
-      const { id, courtId, date } = req.body;
-      const createCourseCommand = new CreateBookingCommand({ id, courtId, date });
+      const { id, user, court, date } = req.body;
+      const createCourseCommand = new CreateBookingCommand({ id, user, court, date });
       await this.commandBus.dispatch(createCourseCommand);
 
       res.status(httpStatus.CREATED).send();
