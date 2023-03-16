@@ -3,7 +3,7 @@ import type { Actions } from './$types';
 import type { PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
 import { Uuid } from '$lib/services/uuid/uuid.service';
-import zfd from 'zod-form-data';
+import { zfd } from 'zod-form-data';
 
 export const load = (async ({ fetch }) => {
 	return {
@@ -31,7 +31,7 @@ export const actions: Actions = {
 			court: zfd.text(),
 			user: zfd.text(),
 			date: zfd.text(),
-      time: zfd.text(),
+			time: zfd.text(),
 			email: zfd.text(),
 			level: zfd.text()
 		});
