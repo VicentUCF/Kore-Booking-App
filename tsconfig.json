@@ -16,7 +16,7 @@
   "include": [
     "src/**/**.ts",
     "tests/**/**.ts"
-  ],
+, "src/apps/CourtsManager/frontend/src/routes/bookings/new/+server.js"  ],
   "exclude": [
     "node_modules",
     "/src/apps/**/frontend/**",

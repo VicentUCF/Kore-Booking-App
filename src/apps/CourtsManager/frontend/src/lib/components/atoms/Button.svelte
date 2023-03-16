@@ -1,13 +1,13 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' = 'button';
 	export let disabled: boolean = false;
-  export let size: 'small' | 'medium' | 'large' = 'medium';
-  export let variant: 'primary' | 'secondary' = 'primary';
-	export let onClick: () => void;
+	export let size: 'small' | 'medium' | 'large' | 'full-width' = 'medium';
+	export let variant: 'primary' | 'secondary' | 'submit' | 'delete' = 'primary';
+	export let onClick: (event: any) => void = () => {};
 
-	const handleClick = () => {
+	const handleClick = (event: any) => {
 		if (onClick) {
-			onClick();
+			onClick(event);
 		}
 	};
 </script>
@@ -62,6 +62,26 @@
 			}
 		}
 
+		&--submit {
+			background-color: #28a745;
+			color: #fff;
+
+			&:hover {
+				background-color: #fff;
+				color: #000;
+			}
+		}
+
+		&--delete {
+			background-color: #dc3545;
+			color: #fff;
+
+			&:hover {
+				background-color: #fff;
+				color: #000;
+			}
+		}
+
 		&--small {
 			padding: 0.25rem 0.5rem;
 			font-size: 0.75rem;
@@ -70,6 +90,10 @@
 		&--large {
 			padding: 0.75rem 1.5rem;
 			font-size: 1.25rem;
+		}
+
+		&--full-width {
+			width: 100%;
 		}
 
 		&--block {

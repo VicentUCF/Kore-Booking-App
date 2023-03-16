@@ -1,25 +1,11 @@
 {
   "configurations": [
     {
-      "type": "node",
+      "name": "Launch Firefox",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/src/index.js",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
-    },
-
-    {
-      "name": "Attach by Process ID",
-      "processId": "${command:PickProcess}",
-      "request": "attach",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "type": "node"
+      "type": "firefox",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
     },
   ]
 }

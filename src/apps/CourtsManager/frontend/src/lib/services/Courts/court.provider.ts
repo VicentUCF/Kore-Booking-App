@@ -2,7 +2,7 @@ import type { Court } from './Court';
 import { BaseProvider } from '../base.provider';
 
 export class CourtProvider extends BaseProvider {
-	static url = `${this.baseUrl}/api/courts`;
+	static url = `${this.baseUrl}/courts`;
 
 	static async getCourts(): Promise<Court[]> {
 		const response = await fetch(this.url);
