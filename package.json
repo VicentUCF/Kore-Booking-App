@@ -5,6 +5,7 @@
   "repository": {
     "url": "https://github.com/CodelyTV/typescript-ddd-course"
   },
+  "type": "module",
   "license": "",
   "engines": {
     "node": ">=12.0.0",
@@ -14,6 +15,7 @@
     "dev:courts_manager:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/apps/CourtsManager/backend/start.ts",
     "start:courts_manager:backend": "NODE_ENV=production node dist/src/apps/CourtsManager/backend/start",
     "dev:courts_manager:frontend": "npm run dev --prefix ./src/apps/CourtsManager/frontend",
+    "build:courts_manager:frontend": "./scripts/move_frontend_build.sh",
     "start": "npm run start:courts_manager:backend",
     "dev": "npm run dev:courts_manager:backend",
     "lint": "tslint src/**/*.ts{,x}",
